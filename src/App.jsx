@@ -4,6 +4,9 @@ import Header from './components/Header';
 import Boton from './components/Boton';
 import Lista from './components/Lista';
 import Add from './components/Add';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ResponsiveAppBar from './components/AddBar';
+import CredentialsSignInPage from './components/Login';
 
 function App() {
   const initialItems = [
@@ -40,14 +43,19 @@ function App() {
   const nombre = "R tilin jugadorx de Fn profesional";
   return (
     <div>
-      <Header />
-      {count}
+      <BrowserRouter>
+      <ResponsiveAppBar />
+      <Routes>
+        <Route path="/" element={<CredentialsSignInPage />} />
+        <Route path="/add" element={<Add add={add}/>} />
+        <Route path="/items" element={<Lista items={items} ondelete={del} />} />
+      </Routes>
+      </BrowserRouter>
+      {/* {count}
       <Boton name={"suma"} click={sum} />
       <Boton name={"resta"} click={resta} />
       <Boton name={"reset"} click={reset} />
-      <Boton name={"mensaje"} click={() => alert(nombre)} />
-      <Add add={add} />
-      <Lista items={items} ondelete={del} />
+      <Boton name={"mensaje"} click={() => alert(nombre)} /> */}
     </div>
   );
 }
